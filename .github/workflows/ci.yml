@@ -1,0 +1,26 @@
+name: virtually there
+on: [ push, pull_request ]
+jobs:
+  test:
+    name: sigh
+    runs-on: ubuntu-latest
+    container:
+      image: vagrantlibvirt/vagrant-libvirt:latest-slim
+    steps:
+    - uses: actions/checkout@v3
+    # - name: what files?
+    #   run: |
+    #     find ${PATH//:/ } || true
+    #     echo OKOK
+    #     find / || true
+    - name: can has virtual?
+      run: |
+        # sudo apt update -qq
+        # sudo apt install -y libvirt-daemon libvirt-daemon-driver-qemu libvirt-clients qemu-kvm qemu-system-x86 virtualbox vagrant vagrant-libvirt
+        # # brew install --cask virtualbox
+        # # brew install --cask vagrant
+        # vagrant plugin install vagrant-libvirt
+        vagrant --version || true
+    - name: can has Vagrantfile?
+      run: |
+        vagrant up --provider libvirt
